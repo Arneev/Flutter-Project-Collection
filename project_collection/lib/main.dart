@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Project Collection | Arneev Singh',
       theme: ThemeData(
-        backgroundColor: Colors.white,
         primarySwatch: Colors.blue,
       ),
       home: MyHome(),

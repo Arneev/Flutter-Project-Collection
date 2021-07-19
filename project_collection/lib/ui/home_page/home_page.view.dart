@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/style.dart';
-import 'package:project_collection/ui/home_page/widgets/header.dart';
+import 'package:project_collection/ui/home_page/widgets/about/about.view.dart';
+import 'package:project_collection/ui/home_page/widgets/header/header.dart';
 import 'package:project_collection/ui/widgets/MyNavBar.dart';
 import 'package:project_collection/ui/widgets/MyScaffold.dart';
 import 'package:stacked/stacked.dart';
@@ -28,7 +29,9 @@ class _HomePageViewState extends State<HomePageView> {
           body: Container(
             width: size.width,
             alignment: Alignment.center,
-            color: Colors.white,
+            decoration: BoxDecoration(
+              gradient: backgroundGradient,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -36,6 +39,7 @@ class _HomePageViewState extends State<HomePageView> {
               children: [
                 //Header
                 Header(),
+                About(),
               ],
             ),
           ),

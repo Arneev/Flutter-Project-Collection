@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
+import 'package:project_collection/ui/home_page/widgets/header/header.helper.dart';
 import 'package:project_collection/ui/widgets/MyNavBar.dart';
 
-import '../../../style.dart';
+import '../../../../style.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
+  @override
+  _HeaderState createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
     return Container(
       width: size.width,
-      padding: EdgeInsets.only(bottom: 25),
+      padding: EdgeInsets.only(bottom: 35),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.white, Colors.blue[700]!.withAlpha(192)],
+          colors: [
+            Colors.transparent,
+            Colors.black.withAlpha(255),
+          ],
           begin: Alignment.bottomCenter,
           end: Alignment.center,
         ),
       ),
       child: ClipPath(
         clipper: MyClipper(),
-        child: Container(
-          width: size.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("images/headerBackground.png"),
-              alignment: Alignment.centerLeft,
-              fit: BoxFit.cover,
-            ),
-          ),
+        child: ImageRotater(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

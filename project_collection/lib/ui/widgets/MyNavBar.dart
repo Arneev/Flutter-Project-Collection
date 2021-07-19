@@ -17,7 +17,8 @@ class MyNavBar extends StatelessWidget {
           colors: [
             Colors.blue.withAlpha(128),
             Colors.purple[300]!.withAlpha(128),
-            Colors.blue.withAlpha(128)
+            // Colors.blue.withAlpha(128)
+            Colors.red.withAlpha(128),
           ],
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
@@ -44,7 +45,7 @@ class MyNavBar extends StatelessWidget {
                 _NavBarItem(text: "Contact", onTap: () => goToAbout(context)),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -7,7 +7,7 @@ const double fontSizeMedium = 20.0;
 const double fontSizeSmall = 18.0;
 
 //Fonts
-const String fontMont = "Montserrat";
+const String fontMont = "Comfortaa";
 const String fontPacifico = "Pacifico";
 const String fontDancingScript = "DancingScript";
 
@@ -29,6 +29,18 @@ const Color backgroundColor = darkNavyBlue;
 
 //Standards
 final BorderRadius borderRadius = BorderRadius.circular(150);
+
+final int backAlpha = 48;
+final LinearGradient backgroundGradient = LinearGradient(
+  end: Alignment.bottomCenter,
+  begin: Alignment.topCenter,
+  colors: [
+    Colors.red.withAlpha(backAlpha + 20),
+    // Colors.purple.withAlpha(backAlpha + 10),
+    Colors.blue.withAlpha(backAlpha),
+    // Colors.purple.withAlpha(backAlpha + 10),
+  ],
+);
 
 class MySpacing extends StatelessWidget {
   late final double height;
