@@ -9,7 +9,7 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: AlwaysScrollableScrollPhysics(),
         child: body,
       ),
     );

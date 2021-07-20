@@ -27,6 +27,9 @@ const Color textColor = darkNavyBlue;
 
 const Color backgroundColor = darkNavyBlue;
 
+//Heights
+double aboutHeight = 0.8;
+
 //Standards
 final BorderRadius borderRadius = BorderRadius.circular(150);
 
