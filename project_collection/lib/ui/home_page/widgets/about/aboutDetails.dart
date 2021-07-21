@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
+import 'package:project_collection/ui/widgets/MySubHeading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../style.dart';
@@ -22,27 +23,11 @@ class Paragraph extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //About Heading
-          Text(
-            "About",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: fontMont,
-              fontSize: fontSizeHeading,
-              fontWeight: FontWeight.w300,
-              letterSpacing: 0.0,
-            ),
-          ),
+          MySubHeading(heading: "About"),
           //Paragraph
           RichText(
             text: TextSpan(
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: fontMont,
-                height: 1.5,
-                fontSize: fontSizeSmall,
-                fontWeight: FontWeight.w300,
-              ),
+              style: paragraphTextStyle,
               children: <TextSpan>[
                 TextSpan(text: "I am a "),
                 TextSpan(
