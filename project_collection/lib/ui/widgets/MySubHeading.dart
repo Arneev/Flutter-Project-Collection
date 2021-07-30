@@ -12,7 +12,7 @@ class MySubHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       heading,
-      textAlign: TextAlign.left,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
         fontFamily: fontMont,

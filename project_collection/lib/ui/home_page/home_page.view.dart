@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/style.dart';
 import 'package:project_collection/ui/home_page/projects/projects.view.dart';
+import 'package:project_collection/ui/home_page/skills/skills_view.dart';
 import 'package:project_collection/ui/home_page/widgets/about/about.view.dart';
 import 'package:project_collection/ui/home_page/widgets/header/header.dart';
 import 'package:project_collection/ui/widgets/MyNavBar.dart';
@@ -41,13 +42,14 @@ class _HomePageViewState extends State<HomePageView> {
                 //Header
                 Header(),
                 About(),
-                MySpacing(
-                  height: 75,
-                ),
+                // MySpacing(
+                //   height: 75,
+                // ),
                 ProjectsView(),
-                MySpacing(
-                  height: 75,
-                ),
+                // MySpacing(
+                //   height: 75,
+                // ),
+                SkillsView(),
               ],
             ),
           ),

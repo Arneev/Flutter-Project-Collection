@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+//Consts
+
+const IconData playstoreIcon = Icons.play_circle;
+const IconData webIcon = Icons.web_rounded;
+const IconData driveIcon = Icons.add_to_drive;
+const IconData dropBoxIcon = Icons.add_box;
+
 //Font Sizes
 const double fontSizeHeading = 48.0;
 const double fontSizeLarge = 24.0;
@@ -22,6 +29,17 @@ const Color grey = Color.fromARGB(255, 97, 97, 97);
 
 const Color teal = Color.fromARGB(255, 1, 150, 136);
 const Color peach = Color.fromARGB(255, 255, 167, 129);
+
+const Color darkCubinoGrey = Color(0xff4d4045);
+const Color cubinoGrey = Color(0xff5b4a52);
+
+const Color dayStarterGreen = Color(0xff7ed957);
+const Color dayStarterDarkGreen = Color(0xff152827);
+const Color dayStarterYellow = Color.fromARGB(128, 255, 255, 0);
+
+const Color brightPink = Color(0xffda7094);
+const Color purpleBlue = Color(0xff6395ec);
+const Color accentPink = Color(0xffe0ebff);
 
 //Colors
 const Color primaryColor = darkNavyBlue;
@@ -47,9 +65,7 @@ final LinearGradient backgroundGradient = LinearGradient(
   begin: Alignment.topCenter,
   colors: [
     Colors.red.withAlpha(backAlpha + 20),
-    // Colors.purple.withAlpha(backAlpha + 10),
     Colors.blue.withAlpha(backAlpha),
-    // Colors.purple.withAlpha(backAlpha + 10),
   ],
 );
 
@@ -57,7 +73,7 @@ final paragraphTextStyle = TextStyle(
   color: Colors.white,
   fontFamily: fontMont,
   height: 1.5,
-  fontSize: fontSizeSmall,
+  fontSize: fontSizeMedium,
   fontWeight: FontWeight.w300,
 );
 

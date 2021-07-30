@@ -5,7 +5,10 @@ import '../../style.dart';
 
 class MyBannerHeading extends StatelessWidget {
   final String headingText;
-  const MyBannerHeading({Key? key, required this.headingText})
+  final Color color;
+
+  const MyBannerHeading(
+      {Key? key, required this.headingText, required this.color})
       : super(key: key);
 
   @override
@@ -17,11 +20,12 @@ class MyBannerHeading extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.orange.withAlpha(64),
-            Colors.red.withAlpha(64),
-            Colors.purple.withAlpha(64),
-            Colors.blue.withAlpha(64),
-            Colors.green.withAlpha(64),
+            // Colors.orange.withAlpha(64),
+            // Colors.red.withAlpha(64),
+            color,
+            color,
+            // Colors.blue.withAlpha(64),
+            // Colors.green.withAlpha(64),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,

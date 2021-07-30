@@ -16,10 +16,6 @@ class Details extends StatelessWidget {
         height: size.height * aboutHeight,
         decoration: BoxDecoration(
           color: Colors.purple[100]!.withAlpha(224),
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(75),
-            bottomRight: Radius.circular(75),
-          ),
         ),
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 30),

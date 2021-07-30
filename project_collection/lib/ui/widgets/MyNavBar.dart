@@ -38,11 +38,10 @@ class MyNavBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _NavBarItem(text: "About", onTap: () => goToAbout(context)),
-                _NavBarItem(text: "Projects", onTap: () => goToAbout(context)),
                 _NavBarItem(
-                    text: "Experience", onTap: () => goToAbout(context)),
-                _NavBarItem(text: "Skills", onTap: () => goToAbout(context)),
-                _NavBarItem(text: "Contact", onTap: () => goToAbout(context)),
+                    text: "Projects", onTap: () => goToProjects(context)),
+                _NavBarItem(text: "Skills", onTap: () => goToSkills(context)),
+                _NavBarItem(text: "Contact", onTap: () => goToContact(context)),
               ],
             ),
           ),

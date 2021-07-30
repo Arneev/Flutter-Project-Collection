@@ -21,11 +21,10 @@ class About extends StatelessWidget {
 
     return Container(
       alignment: Alignment.topCenter,
-      width: size.width * 0.90,
+      width: size.width * 1,
       margin: EdgeInsets.only(bottom: 15, top: 30),
       decoration: BoxDecoration(
         color: Colors.black54,
-        borderRadius: BorderRadius.circular(75),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
