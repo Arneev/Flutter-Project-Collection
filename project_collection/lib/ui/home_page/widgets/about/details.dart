@@ -9,48 +9,51 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
-    return ClipPath(
-      clipper: _MyClipper(),
-      child: Container(
-        width: size.width,
-        height: size.height * aboutHeight,
-        decoration: BoxDecoration(
-          color: Colors.purple[100]!.withAlpha(224),
-        ),
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(vertical: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            MySpacing(
-              height: 15,
-            ),
-            _ProfilePicture(),
-            MySpacing(
-              height: 15,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _CleanText(
-                    text: "Arneev Mohan Singh",
-                  ),
-                  _CleanText(
-                    text: "Durban, South Africa",
-                  ),
-                  _CleanText(
-                    text: "20 Years Old",
-                  ),
-                ],
+    return Container(
+      width: size.width,
+      child: ClipPath(
+        clipper: _MyClipper(),
+        child: Container(
+          width: size.width,
+          decoration: BoxDecoration(
+            color: Colors.purple[100]!.withAlpha(224),
+          ),
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(
+              vertical: 30, horizontal: size.width * 0.1 * 0.5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MySpacing(
+                height: 15,
               ),
-            ),
-            MySpacing(
-              height: 15,
-            ),
-          ],
+              _ProfilePicture(),
+              MySpacing(
+                height: 15,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _CleanText(
+                      text: "Arneev Mohan Singh",
+                    ),
+                    _CleanText(
+                      text: "Durban, South Africa",
+                    ),
+                    _CleanText(
+                      text: "20 Years Old",
+                    ),
+                  ],
+                ),
+              ),
+              MySpacing(
+                height: 15,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -86,7 +89,7 @@ class _ProfilePicture extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
-          image: AssetImage("images/selfie.png"),
+          image: AssetImage("images/selfie.jpg"),
           fit: BoxFit.contain,
           alignment: Alignment.center,
         ),

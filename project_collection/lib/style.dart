@@ -55,6 +55,7 @@ const Color backgroundColor = darkNavyBlue;
 //Heights
 double aboutHeight = 0.8;
 double projectHeightOffset = 45;
+double columnOffset = projectHeightOffset * 1.95;
 
 //Standards
 final BorderRadius borderRadius = BorderRadius.circular(150);

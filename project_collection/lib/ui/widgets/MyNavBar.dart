@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
 import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/helpers/navigation_helper.dart';
 import 'package:project_collection/style.dart';
@@ -66,8 +67,18 @@ class __NavBarItemState extends State<_NavBarItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => this.widget.onTap(),
-      child: Container(
+      child: HoverAnimatedContainer(
         padding: EdgeInsets.all(5),
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 400),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.transparent,
+        ),
+        hoverDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.black12,
+        ),
         child: Text(
           this.widget.text,
           style: TextStyle(

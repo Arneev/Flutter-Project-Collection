@@ -6,9 +6,13 @@ import '../../style.dart';
 class MyBannerHeading extends StatelessWidget {
   final String headingText;
   final Color color;
+  final EdgeInsets padding;
 
   const MyBannerHeading(
-      {Key? key, required this.headingText, required this.color})
+      {Key? key,
+      required this.headingText,
+      required this.color,
+      this.padding = const EdgeInsets.symmetric(vertical: 5)})
       : super(key: key);
 
   @override
@@ -16,7 +20,7 @@ class MyBannerHeading extends StatelessWidget {
     final size = getSize(context);
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: padding,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [

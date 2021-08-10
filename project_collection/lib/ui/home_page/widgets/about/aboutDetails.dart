@@ -13,7 +13,7 @@ class Paragraph extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = getSize(context);
     return Container(
-      height: size.height * aboutHeight,
+      width: size.width * 0.5,
       padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.1 * 0.5, vertical: 30),
       alignment: Alignment.topCenter,
@@ -24,10 +24,14 @@ class Paragraph extends StatelessWidget {
         children: [
           //About Heading
           MySubHeading(heading: "About"),
+          MySpacing(
+            height: 10,
+          ),
           //Paragraph
           RichText(
             text: TextSpan(
-              style: paragraphTextStyle,
+              style:
+                  paragraphTextStyle.copyWith(fontSize: fontSizeMedium * 0.9),
               children: <TextSpan>[
                 TextSpan(text: "I am a "),
                 TextSpan(

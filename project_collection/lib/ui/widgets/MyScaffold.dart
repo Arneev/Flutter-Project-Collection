@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_collection/helpers/static.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget body;
@@ -9,6 +10,7 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        controller: StaticData.scrollController,
         physics: AlwaysScrollableScrollPhysics(),
         child: body,
       ),

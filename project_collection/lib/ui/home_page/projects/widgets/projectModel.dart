@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
 import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/ui/widgets/MySubHeading.dart';
 
@@ -17,6 +18,7 @@ class ProjectModel extends StatelessWidget {
   final Color accentColor;
   final bool isLogoBorder;
   final Color logoBorderColor;
+  final Widget Function(Widget) logoParentWidget;
 
   ProjectModel({
     required this.gradientColors,
@@ -31,6 +33,7 @@ class ProjectModel extends StatelessWidget {
     required this.accentColor,
     this.isLogoBorder = false,
     this.logoBorderColor = Colors.white,
+    required this.logoParentWidget,
   });
 
   @override
@@ -41,7 +44,7 @@ class ProjectModel extends StatelessWidget {
       clipper: MyClipper(),
       child: Container(
         width: size.width,
-        padding: EdgeInsets.symmetric(vertical: projectHeightOffset * 2),
+        padding: EdgeInsets.symmetric(vertical: projectHeightOffset * 2.2),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -61,6 +64,7 @@ class ProjectModel extends StatelessWidget {
                 textColor: textColor,
                 isLogoBorder: isLogoBorder,
                 logoBorderColor: logoBorderColor,
+                logoParentWidget: logoParentWidget,
               ),
             ),
             Align(
@@ -90,6 +94,7 @@ class ProjectDetails extends StatelessWidget {
   final Color textColor;
   final bool isLogoBorder;
   final Color logoBorderColor;
+  final Function(Widget) logoParentWidget;
 
   ProjectDetails({
     required this.logoColor,
@@ -98,6 +103,7 @@ class ProjectDetails extends StatelessWidget {
     required this.textColor,
     required this.isLogoBorder,
     required this.logoBorderColor,
+    required this.logoParentWidget,
   });
 
   @override
@@ -117,6 +123,7 @@ class ProjectDetails extends StatelessWidget {
             color: logoColor,
             isBorder: isLogoBorder,
             borderColor: logoBorderColor,
+            parentWidget: logoParentWidget,
           ),
           MySpacing(
             height: 15,
@@ -125,7 +132,7 @@ class ProjectDetails extends StatelessWidget {
             heading: projectName,
             optionalTextStyle: TextStyle(
               fontFamily: fontPacifico,
-              fontSize: fontSizeHeading * 3,
+              fontSize: fontSizeHeading * 2,
               color: textColor.withAlpha(200),
             ),
           ),
@@ -138,11 +145,12 @@ class ProjectDetails extends StatelessWidget {
   }
 }
 
-class ProjectLogo extends StatelessWidget {
+class ProjectLogo extends StatefulWidget {
   final String imageName;
   final Color? color;
   final bool isBorder;
   final Color borderColor;
+  final Function(Widget) parentWidget;
 
   const ProjectLogo({
     required this.imageName,
@@ -150,27 +158,38 @@ class ProjectLogo extends StatelessWidget {
     this.color = null,
     required this.isBorder,
     required this.borderColor,
+    required this.parentWidget,
   });
 
   @override
+  _ProjectLogoState createState() => _ProjectLogoState();
+}
+
+class _ProjectLogoState extends State<ProjectLogo> {
+  @override
   Widget build(BuildContext context) {
     final size = getSize(context);
-    return Container(
-      decoration: (isBorder)
-          ? BoxDecoration(
-              border: Border.all(
-                color: borderColor,
-                style: BorderStyle.solid,
-                width: 2.5,
-              ),
-            )
-          : null,
-      margin: EdgeInsets.symmetric(vertical: 15),
-      child: Image.asset(
-        "images/" + imageName,
-        color: color,
-      ),
-    );
+    return this.widget.parentWidget(
+          Container(
+            width: size.width * 0.25,
+            height: size.width * 0.25,
+            decoration: (this.widget.isBorder)
+                ? BoxDecoration(
+                    border: Border.all(
+                      color: this.widget.borderColor,
+                      style: BorderStyle.solid,
+                      width: 2.5,
+                    ),
+                  )
+                : null,
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: Image.asset(
+              "images/" + this.widget.imageName,
+              fit: BoxFit.cover,
+              color: this.widget.color,
+            ),
+          ),
+        );
   }
 }
 
@@ -203,7 +222,7 @@ class ProjectInfo extends StatelessWidget {
             MySubHeading(
               heading: getTechnologiesSpacing(technologies),
               optionalTextStyle:
-                  TextStyle(fontSize: fontSizeLarge * 1.5, color: accentColor),
+                  TextStyle(fontSize: fontSizeLarge * 1, color: accentColor),
             ),
             MySpacing(height: 15),
             Container(
@@ -212,7 +231,7 @@ class ProjectInfo extends StatelessWidget {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   style: paragraphTextStyle.copyWith(
-                      fontSize: fontSizeLarge, color: textColor),
+                      fontSize: fontSizeMedium, color: textColor),
                   children: paragraphs,
                 ),
               ),
@@ -223,7 +242,7 @@ class ProjectInfo extends StatelessWidget {
                 MySubHeading(
                   heading: "Check it out!",
                   optionalTextStyle: TextStyle(
-                      fontSize: fontSizeLarge * 1.1, color: accentColor),
+                      fontSize: fontSizeLarge * 0.9, color: accentColor),
                 ),
                 MySpacing(
                   height: 15,
@@ -287,25 +306,38 @@ class ProjectIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: -1,
-            right: -1,
-            child: Icon(
-              icon,
-              color: color.withAlpha(100),
-              size: 60.0,
+    return HoverAnimatedContainer(
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.transparent,
+      ),
+      padding: EdgeInsets.all(5),
+      hoverDecoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.black12,
+      ),
+      child: GestureDetector(
+        onTap: () => onTap(),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: -1,
+              right: -1,
+              child: Icon(
+                icon,
+                color: color.withAlpha(100),
+                size: 50.0,
+              ),
             ),
-          ),
-          Icon(
-            icon,
-            color: color,
-            size: 60.0,
-          ),
-        ],
+            Icon(
+              icon,
+              color: color,
+              size: 50.0,
+            ),
+          ],
+        ),
       ),
     );
   }

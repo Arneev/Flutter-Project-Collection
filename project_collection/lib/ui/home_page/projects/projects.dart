@@ -1,45 +1,40 @@
+import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/style.dart';
-import 'package:project_collection/ui/home_page/projects/projects.viewmodel.dart';
 import 'package:project_collection/ui/home_page/projects/widgets/projectModel.dart';
-import 'package:stacked/stacked.dart';
 import 'package:project_collection/ui/widgets/MyBannerHeading.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_color/flutter_color.dart';
 
-class ProjectsView extends StatelessWidget {
-  const ProjectsView({Key? key}) : super(key: key);
+class Projects extends StatefulWidget {
+  const Projects({Key? key}) : super(key: key);
 
   @override
+  _ProjectsState createState() => _ProjectsState();
+}
+
+class _ProjectsState extends State<Projects> {
+  @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ProjectsViewModel>.nonReactive(
-      viewModelBuilder: () => ProjectsViewModel(),
-      builder: (
-        BuildContext context,
-        ProjectsViewModel model,
-        _,
-      ) {
-        final size = getSize(context);
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            MyBannerHeading(
-              headingText: "Projects",
-              color: Colors.purple.withAlpha(64),
-            ),
-            MySpacing(),
-            LifePlumProject(),
-            DayStarterProject(),
-            CubinoProject(),
-            PlaterProject(),
-            FinanceManagerProject(),
-            LecTracProject(),
-            CategoraProject(),
-          ],
-        );
-      },
+    final size = getSize(context);
+    return ColumnSuper(
+      key: this.widget.key,
+      innerDistance: -columnOffset,
+      children: [
+        MyBannerHeading(
+          headingText: "Projects",
+          color: Colors.purple.withAlpha(64),
+          padding: EdgeInsets.only(top: 5, bottom: columnOffset / 2),
+        ),
+        LifePlumProject(),
+        DayStarterProject(),
+        CubinoProject(),
+        PlaterProject(),
+        FinanceManagerProject(),
+        LecTracProject(),
+        CategoraProject(),
+      ],
     );
   }
 }
@@ -47,10 +42,13 @@ class ProjectsView extends StatelessWidget {
 // ignore: non_constant_identifier_names
 Widget LifePlumProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => RotateLifePlum(
+      child: child,
+    ),
     accentColor: Colors.white,
     gradientColors: [
-      purple.withAlpha(125),
-      purple.withAlpha(200),
+      purple.mix(Colors.white, 0.4)!,
+      purple.mix(Colors.white, 0.2)!,
     ],
     logoColor: Colors.white,
     logoName: "lifePlum.png",
@@ -88,6 +86,9 @@ Widget LifePlumProject() {
 // ignore: non_constant_identifier_names
 Widget CategoraProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: brightRed,
     gradientColors: [
       darkNavyBlue,
@@ -135,6 +136,9 @@ Widget CategoraProject() {
 // ignore: non_constant_identifier_names
 Widget CubinoProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: brightRed,
     gradientColors: [
       darkCubinoGrey,
@@ -181,6 +185,9 @@ Widget CubinoProject() {
 // ignore: non_constant_identifier_names
 Widget DayStarterProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: dayStarterYellow,
     gradientColors: [
       dayStarterDarkGreen.withAlpha(156),
@@ -222,6 +229,9 @@ Widget DayStarterProject() {
 // ignore: non_constant_identifier_names
 Widget FinanceManagerProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: Colors.white.withBlue(192),
     gradientColors: [
       brightRed.withAlpha(192),
@@ -263,6 +273,9 @@ Widget FinanceManagerProject() {
 // ignore: non_constant_identifier_names
 Widget LecTracProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: accentPink,
     gradientColors: [
       purpleBlue,
@@ -307,6 +320,9 @@ Widget LecTracProject() {
 // ignore: non_constant_identifier_names
 Widget PlaterProject() {
   return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
     accentColor: Colors.white.withAlpha(192),
     gradientColors: [
       Colors.brown[300]!,
@@ -343,4 +359,20 @@ Widget PlaterProject() {
       ),
     ],
   );
+}
+
+class RotateLifePlum extends StatefulWidget {
+  final Widget child;
+
+  RotateLifePlum({required this.child});
+
+  @override
+  _RotateLifePlumState createState() => _RotateLifePlumState();
+}
+
+class _RotateLifePlumState extends State<RotateLifePlum> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
