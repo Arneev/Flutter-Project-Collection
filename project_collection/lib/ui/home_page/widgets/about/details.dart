@@ -121,7 +121,7 @@ class _ProfilePicture extends StatelessWidget {
 
     return Container(
       width: (!isPhone) ? size.width * 0.3 : size.width * 0.5,
-      height: (!isPhone) ? size.width * 0.3 : size.width * 0.5,
+      height: (!isPhone) ? size.height * 0.3 : size.width * 0.5,
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
