@@ -14,4 +14,6 @@ class StaticData {
   static GlobalKey skillsKey = new GlobalKey();
 
   static GlobalKey contactKey = new GlobalKey();
+
+  static late Size globalSize;
 }

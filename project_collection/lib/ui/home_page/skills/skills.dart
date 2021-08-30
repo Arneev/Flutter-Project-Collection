@@ -54,19 +54,43 @@ class SkillsTable extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _createSkillTable(context: context, numberPerRow: 3),
+        children: _createSkillTable(
+            context: context,
+            numberPerRow: getNumberRows(size.width),
+            shrinkSize: getShrinkSize(size.width)),
       ),
     );
   }
 }
 
+int getNumberRows(double width) {
+  if (width < phoneWidth) {
+    return 1;
+  } else if (width < tabletWidth) {
+    return 2;
+  }
+  return 3;
+}
+
+double getShrinkSize(double width) {
+  if (width < phoneWidth) {
+    return 0.5;
+  } else if (width < tabletWidth) {
+    return 0.65;
+  }
+
+  return 0.8;
+}
+
 List<Widget> _createSkillTable(
-    {required int numberPerRow, required BuildContext context}) {
+    {required int numberPerRow,
+    required BuildContext context,
+    required double shrinkSize}) {
   List<Widget> widgets = [];
 
   final size = getSize(context);
 
-  final double sizeShrink = 0.8;
+  final double sizeShrink = shrinkSize;
 
   double widthSize = (size.width * sizeShrink) / numberPerRow;
 
@@ -78,7 +102,7 @@ List<Widget> _createSkillTable(
   );
 
   for (int i = 1; i <= allSkills.length; i++) {
-    if (i % 3 != 0) {
+    if (i % numberPerRow != 0) {
       tempRow.children.add(
         SkillCube(
             imageLoc: allSkills[i - 1].imageName,
@@ -138,14 +162,19 @@ class SkillCube extends StatelessWidget {
             width: widthSize * imageScale,
             height: widthSize * imageScale,
           ),
-          MySpacing(
-            height: widthSize * 0.025,
-          ),
+          // MySpacing(
+          //   height: widthSize * 0.025,
+          // ),
+          // Expanded(
           Expanded(
-            child: AutoSizeText(
-              text,
-              textAlign: TextAlign.center,
-              style: paragraphTextStyle,
+            child: Align(
+              alignment: Alignment.center,
+              child: AutoSizeText(
+                text,
+                textAlign: TextAlign.start,
+                style: paragraphTextStyle,
+                // ),
+              ),
             ),
           ),
         ],

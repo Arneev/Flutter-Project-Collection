@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
@@ -86,7 +88,7 @@ Widget LifePlumProject() {
 // ignore: non_constant_identifier_names
 Widget CategoraProject() {
   return ProjectModel(
-    logoParentWidget: (Widget child) => Container(
+    logoParentWidget: (Widget child) => RotateCategora(
       child: child,
     ),
     accentColor: brightRed,
@@ -370,9 +372,77 @@ class RotateLifePlum extends StatefulWidget {
   _RotateLifePlumState createState() => _RotateLifePlumState();
 }
 
-class _RotateLifePlumState extends State<RotateLifePlum> {
+class _RotateLifePlumState extends State<RotateLifePlum>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: this.widget.child,
+    );
   }
 }
+
+class RotateCategora extends StatefulWidget {
+  final Widget child;
+
+  RotateCategora({required this.child});
+
+  @override
+  RotateCategoraState createState() => RotateCategoraState();
+}
+
+class RotateCategoraState extends State<RotateCategora>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: const Duration(seconds: 20))
+        ..repeat();
+
+  late final Animation<double> _animation =
+      CurvedAnimation(parent: _controller, curve: Curves.linear);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: _animation,
+      child: this.widget.child,
+    );
+  }
+}
+
+/*
+class _RotatingLogo extends StatefulWidget {
+  @override
+  __RotatingLogoState createState() => __RotatingLogoState();
+}
+
+class __RotatingLogoState extends State<_RotatingLogo>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: const Duration(seconds: 20))
+        ..repeat();
+
+  late final Animation<double> _animation =
+      CurvedAnimation(parent: _controller, curve: Curves.linear);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: _animation,
+      child: TransparentLogo(),
+    );
+  }
+}
+
+*/

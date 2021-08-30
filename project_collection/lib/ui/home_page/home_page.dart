@@ -17,12 +17,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
+    StaticData.globalSize = size;
     return MyScaffold(
       body: Container(
         width: size.width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: backgroundGradient,
+          // gradient: backgroundGradient,
+          color: Colors.red[50],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -7,6 +7,9 @@ const IconData webIcon = Icons.web_rounded;
 const IconData driveIcon = Icons.add_to_drive;
 const IconData dropBoxIcon = Icons.add_box;
 
+const double phoneWidth = 700;
+const double tabletWidth = 1100;
+
 //Font Sizes
 const double fontSizeHeading = 48.0;
 const double fontSizeLarge = 24.0;

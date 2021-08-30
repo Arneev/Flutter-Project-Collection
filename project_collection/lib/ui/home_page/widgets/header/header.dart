@@ -14,6 +14,7 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
+    bool isPhone = size.width < phoneWidth;
     return Container(
       width: size.width,
       padding: EdgeInsets.only(bottom: 35),
@@ -51,7 +52,7 @@ class _HeaderState extends State<Header> {
                         color: Colors.white.withAlpha(205),
                         fontFamily: fontPacifico,
                         fontWeight: FontWeight.w300,
-                        fontSize: fontSizeHeading,
+                        fontSize: getHeadingSize(isPhone),
                       ),
                       textScaleFactor: 1.3,
                     ),
@@ -62,7 +63,7 @@ class _HeaderState extends State<Header> {
                       style: TextStyle(
                         color: Colors.white.withAlpha(205),
                         fontFamily: fontMont,
-                        fontSize: fontSizeHeading,
+                        fontSize: getHeadingSize(isPhone),
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -78,6 +79,13 @@ class _HeaderState extends State<Header> {
       ),
     );
   }
+}
+
+double getHeadingSize(bool isPhone) {
+  if (isPhone) {
+    return fontSizeLarge;
+  }
+  return fontSizeHeading;
 }
 
 class MyClipper extends CustomClipper<Path> {

@@ -5,6 +5,29 @@ import 'package:project_collection/ui/widgets/MySubHeading.dart';
 
 import '../../../../style.dart';
 
+// class ChildrenWidget extends StatelessWidget {
+//   List<Widget> children;
+
+//   ChildrenWidget({required this.children});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final size = getSize(context);
+
+//     if (size.width < phoneWidth) {
+//       return Column(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: children,
+//       );
+//     }
+
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: children
+//     );
+//   }
+// }
+
 class ProjectModel extends StatelessWidget {
   final double seperationWidth = 0.5;
   final List<Color> gradientColors;
@@ -19,6 +42,8 @@ class ProjectModel extends StatelessWidget {
   final bool isLogoBorder;
   final Color logoBorderColor;
   final Widget Function(Widget) logoParentWidget;
+
+  bool isPhone = false;
 
   ProjectModel({
     required this.gradientColors,
@@ -39,7 +64,7 @@ class ProjectModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
-
+    isPhone = size.width <= phoneWidth;
     return ClipPath(
       clipper: MyClipper(),
       child: Container(
@@ -52,42 +77,83 @@ class ProjectModel extends StatelessWidget {
             colors: gradientColors,
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: size.width * seperationWidth,
-              child: ProjectDetails(
-                logoColor: logoColor,
-                logoName: logoName,
-                projectName: projectName,
-                textColor: textColor,
-                isLogoBorder: isLogoBorder,
-                logoBorderColor: logoBorderColor,
-                logoParentWidget: logoParentWidget,
+        //Desktop Layout
+        child: (!isPhone)
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: size.width * seperationWidth,
+                    child: ProjectDetails(
+                      isPhone: isPhone,
+                      logoColor: logoColor,
+                      logoName: logoName,
+                      projectName: projectName,
+                      textColor: textColor,
+                      isLogoBorder: isLogoBorder,
+                      logoBorderColor: logoBorderColor,
+                      logoParentWidget: logoParentWidget,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: size.width * (1.0 - seperationWidth),
+                      child: ProjectInfo(
+                        isPhone: isPhone,
+                        technologies: technologies,
+                        paragraphs: paragraphs,
+                        projectIcons: projectIcons,
+                        textColor: textColor,
+                        accentColor: accentColor,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            //Phone Layout
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: size.width * 0.9,
+                    child: ProjectDetails(
+                      isPhone: isPhone,
+                      logoColor: logoColor,
+                      logoName: logoName,
+                      projectName: projectName,
+                      textColor: textColor,
+                      isLogoBorder: isLogoBorder,
+                      logoBorderColor: logoBorderColor,
+                      logoParentWidget: logoParentWidget,
+                    ),
+                  ),
+                  MySpacing(
+                    height: 10,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: size.width * 0.8,
+                      child: ProjectInfo(
+                        technologies: technologies,
+                        paragraphs: paragraphs,
+                        projectIcons: projectIcons,
+                        textColor: textColor,
+                        accentColor: accentColor,
+                        isPhone: isPhone,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: size.width * (1.0 - seperationWidth),
-                child: ProjectInfo(
-                  technologies: technologies,
-                  paragraphs: paragraphs,
-                  projectIcons: projectIcons,
-                  textColor: textColor,
-                  accentColor: accentColor,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
 }
 
 class ProjectDetails extends StatelessWidget {
+  final bool isPhone;
   final String logoName;
   final Color? logoColor;
   final String projectName;
@@ -97,6 +163,7 @@ class ProjectDetails extends StatelessWidget {
   final Function(Widget) logoParentWidget;
 
   ProjectDetails({
+    required this.isPhone,
     required this.logoColor,
     required this.logoName,
     required this.projectName,
@@ -119,6 +186,7 @@ class ProjectDetails extends StatelessWidget {
             height: 15,
           ),
           ProjectLogo(
+            isPhone: isPhone,
             imageName: logoName,
             color: logoColor,
             isBorder: isLogoBorder,
@@ -146,6 +214,7 @@ class ProjectDetails extends StatelessWidget {
 }
 
 class ProjectLogo extends StatefulWidget {
+  final bool isPhone;
   final String imageName;
   final Color? color;
   final bool isBorder;
@@ -156,6 +225,7 @@ class ProjectLogo extends StatefulWidget {
     required this.imageName,
     // ignore: avoid_init_to_null
     this.color = null,
+    required this.isPhone,
     required this.isBorder,
     required this.borderColor,
     required this.parentWidget,
@@ -171,8 +241,8 @@ class _ProjectLogoState extends State<ProjectLogo> {
     final size = getSize(context);
     return this.widget.parentWidget(
           Container(
-            width: size.width * 0.25,
-            height: size.width * 0.25,
+            width: (!widget.isPhone) ? size.width * 0.25 : size.width * 0.6,
+            height: (!widget.isPhone) ? size.width * 0.25 : size.width * 0.6,
             decoration: (this.widget.isBorder)
                 ? BoxDecoration(
                     border: Border.all(
@@ -194,6 +264,7 @@ class _ProjectLogoState extends State<ProjectLogo> {
 }
 
 class ProjectInfo extends StatelessWidget {
+  final bool isPhone;
   final List<String> technologies;
   final List<TextSpan> paragraphs;
   final List<ProjectIcon> projectIcons;
@@ -206,6 +277,7 @@ class ProjectInfo extends StatelessWidget {
     required this.projectIcons,
     required this.textColor,
     required this.accentColor,
+    required this.isPhone,
   });
 
   @override
@@ -214,7 +286,7 @@ class ProjectInfo extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        width: size.width * 0.5,
+        width: (!isPhone) ? size.width * 0.5 : size.width * 0.8,
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -226,7 +298,7 @@ class ProjectInfo extends StatelessWidget {
             ),
             MySpacing(height: 15),
             Container(
-              width: size.width * 0.3,
+              width: (!isPhone) ? size.width * 0.3 : size.width * 0.8,
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

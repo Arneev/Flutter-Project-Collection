@@ -33,22 +33,36 @@ class _AboutState extends State<About> {
       decoration: BoxDecoration(
         color: Colors.black54,
       ),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              flex: aboutWidth,
-              child: Paragraph(),
+      //Desktop Layout
+      child: (size.width > phoneWidth)
+          ? IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    flex: aboutWidth,
+                    child: Paragraph(),
+                  ),
+                  Expanded(
+                    flex: 100 - aboutWidth,
+                    child: Details(),
+                  ),
+                ],
+              ),
+            )
+          //Phone Layout
+          : Container(
+              width: size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Details(),
+                  Paragraph(),
+                ],
+              ),
             ),
-            Expanded(
-              flex: 100 - aboutWidth,
-              child: Details(),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

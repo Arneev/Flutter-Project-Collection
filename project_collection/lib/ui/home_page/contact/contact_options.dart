@@ -17,23 +17,54 @@ class ContactOptions extends StatefulWidget {
 class _ContactOptionsState extends State<ContactOptions> {
   @override
   Widget build(BuildContext context) {
+    final size = getSize(context);
+    bool isPhone = size.width < phoneWidth;
     return Container(
       key: StaticData.contactKey,
       padding: EdgeInsets.all(15),
       alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          ContactBlock(
-              imageName: "github", goTo: "https://www.github.com/Arneev"),
-          ContactBlock(
-              imageName: "linkedin",
-              goTo: "https://www.linkedin.com/in/arneev-singh/"),
-          ContactBlock(imageName: "email", goTo: "mailto:arneevso@gmail.com"),
-          ContactBlock(imageName: "phone", goTo: "tel:+27614797043"),
-        ],
-      ),
+      child: (!isPhone)
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ContactBlock(
+                    imageName: "github", goTo: "https://www.github.com/Arneev"),
+                ContactBlock(
+                    imageName: "linkedin",
+                    goTo: "https://www.linkedin.com/in/arneev-singh/"),
+                ContactBlock(
+                    imageName: "email", goTo: "mailto:arneevso@gmail.com"),
+                ContactBlock(imageName: "phone", goTo: "tel:+27614797043"),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ContactBlock(
+                        imageName: "github",
+                        goTo: "https://www.github.com/Arneev"),
+                    ContactBlock(
+                        imageName: "linkedin",
+                        goTo: "https://www.linkedin.com/in/arneev-singh/"),
+                  ],
+                ),
+                MySpacing(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ContactBlock(
+                        imageName: "email", goTo: "mailto:arneevso@gmail.com"),
+                    ContactBlock(imageName: "phone", goTo: "tel:+27614797043"),
+                  ],
+                ),
+              ],
+            ),
     );
   }
 }

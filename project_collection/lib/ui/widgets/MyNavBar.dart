@@ -4,6 +4,8 @@ import 'package:project_collection/helpers/helper.dart';
 import 'package:project_collection/helpers/navigation_helper.dart';
 import 'package:project_collection/style.dart';
 
+import 'myNavBarItem.dart';
+
 class MyNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,61 +36,21 @@ class MyNavBar extends StatelessWidget {
                 left: size.width * 0.075, right: size.width * 0.025),
             child: _NavHeading(),
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _NavBarItem(text: "About", onTap: () => goToAbout(context)),
-                _NavBarItem(
-                    text: "Projects", onTap: () => goToProjects(context)),
-                _NavBarItem(text: "Skills", onTap: () => goToSkills(context)),
-                _NavBarItem(text: "Contact", onTap: () => goToContact(context)),
-              ],
+          if (size.width > 860)
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  NavBarItem(text: "About", onTap: () => goToAbout(context)),
+                  NavBarItem(
+                      text: "Projects", onTap: () => goToProjects(context)),
+                  NavBarItem(text: "Skills", onTap: () => goToSkills(context)),
+                  NavBarItem(
+                      text: "Contact", onTap: () => goToContact(context)),
+                ],
+              ),
             ),
-          ),
         ],
-      ),
-    );
-  }
-}
-
-class _NavBarItem extends StatefulWidget {
-  final String text;
-  final Function onTap;
-
-  _NavBarItem({required this.text, required this.onTap});
-
-  @override
-  __NavBarItemState createState() => __NavBarItemState();
-}
-
-class __NavBarItemState extends State<_NavBarItem> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => this.widget.onTap(),
-      child: HoverAnimatedContainer(
-        padding: EdgeInsets.all(5),
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 400),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.transparent,
-        ),
-        hoverDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.black12,
-        ),
-        child: Text(
-          this.widget.text,
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: fontMont,
-            fontSize: fontSizeMedium,
-            letterSpacing: 1.1,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
       ),
     );
   }

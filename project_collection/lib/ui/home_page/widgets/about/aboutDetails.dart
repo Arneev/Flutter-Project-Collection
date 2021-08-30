@@ -12,15 +12,17 @@ class Paragraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
+    bool isPhone = (size.width < phoneWidth);
     return Container(
-      width: size.width * 0.5,
+      alignment: Alignment.topCenter,
+      width: (!isPhone) ? size.width * 0.5 : size.width * 0.8,
       padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.1 * 0.5, vertical: 30),
-      alignment: Alignment.topCenter,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: (!isPhone) ? MainAxisSize.max : MainAxisSize.min,
+        crossAxisAlignment:
+            (!isPhone) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           //About Heading
           MySubHeading(heading: "About"),
@@ -35,9 +37,6 @@ class Paragraph extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(text: "I am a "),
                 TextSpan(
-                  onEnter: (_) {
-                    //TODO: Animation for hover
-                  },
                   text: "Flutter",
                   style: TextStyle(fontWeight: FontWeight.bold),
                   recognizer: TapGestureRecognizer()

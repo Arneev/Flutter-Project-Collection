@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_collection/helpers/helper.dart';
+import 'package:project_collection/ui/home_page/projects/widgets/projectModel.dart';
 
 import '../../../../style.dart';
 
@@ -9,48 +10,78 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
+    bool isPhone = (size.width < phoneWidth);
     return Container(
       width: size.width,
       child: ClipPath(
-        clipper: _MyClipper(),
+        clipper: _MyClipper(isPhone),
         child: Container(
           width: size.width,
           decoration: BoxDecoration(
             color: Colors.purple[100]!.withAlpha(224),
           ),
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(
-              vertical: 30, horizontal: size.width * 0.1 * 0.5),
+          padding: (!isPhone)
+              ? EdgeInsets.symmetric(
+                  vertical: 30, horizontal: size.width * 0.1 * 0.5)
+              : EdgeInsets.only(top: 5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: (!isPhone) ? MainAxisSize.max : MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               MySpacing(
-                height: 15,
+                height: 30,
               ),
-              _ProfilePicture(),
+
+              _ProfilePicture(isPhone),
               MySpacing(
                 height: 15,
               ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _CleanText(
-                      text: "Arneev Mohan Singh",
+              //Desktop Layout
+              (!isPhone)
+                  ? Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _CleanText(
+                            text: "Arneev Mohan Singh",
+                          ),
+                          _CleanText(
+                            text: "Durban, South Africa",
+                          ),
+                          _CleanText(
+                            text: "20 Years Old",
+                          ),
+                        ],
+                      ),
+                    )
+                  //Phone Layout
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MySpacing(
+                          height: 10,
+                        ),
+                        _CleanText(
+                          text: "Arneev Mohan Singh",
+                        ),
+                        MySpacing(
+                          height: 5,
+                        ),
+                        _CleanText(
+                          text: "Durban, South Africa",
+                        ),
+                        MySpacing(
+                          height: 5,
+                        ),
+                        _CleanText(
+                          text: "20 Years Old",
+                        ),
+                      ],
                     ),
-                    _CleanText(
-                      text: "Durban, South Africa",
-                    ),
-                    _CleanText(
-                      text: "20 Years Old",
-                    ),
-                  ],
-                ),
-              ),
               MySpacing(
-                height: 15,
+                height: size.height * 0.05,
               ),
             ],
           ),
@@ -66,25 +97,31 @@ class _CleanText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontFamily: fontMont,
-        fontSize: fontSizeLarge,
-        color: Colors.white,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontFamily: fontMont,
+          fontSize: fontSizeLarge,
+          color: Colors.white,
+        ),
+        textAlign: TextAlign.center,
       ),
-      textAlign: TextAlign.center,
     );
   }
 }
 
 class _ProfilePicture extends StatelessWidget {
+  bool isPhone;
+  _ProfilePicture(this.isPhone);
   @override
   Widget build(BuildContext context) {
     final size = getSize(context);
+
     return Container(
-      width: size.width * 0.3,
-      height: size.height * 0.3,
+      width: (!isPhone) ? size.width * 0.3 : size.width * 0.5,
+      height: (!isPhone) ? size.width * 0.3 : size.width * 0.5,
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -104,31 +141,66 @@ class _ProfilePicture extends StatelessWidget {
 }
 
 class _MyClipper extends CustomClipper<Path> {
+  late final bool isPhone;
+
+  _MyClipper(this.isPhone);
+
   @override
   Path getClip(Size size) {
-    Path path = new Path();
+    if (!isPhone) {
+      Path path = new Path();
 
-    final widgthFull = size.width;
-    final heightFull = size.height;
+      final widthFull = size.width;
+      final heightFull = size.height;
 
-    final widthOffset = size.width / 16;
+      final widthOffset = size.width / 16;
 
-    //Go around the Widget
-    path.moveTo(0, heightFull);
-    path.lineTo(widgthFull, heightFull);
-    path.lineTo(widgthFull, 0);
-    path.lineTo(0, 0);
+      //Go around the Widget
+      path.moveTo(0, heightFull);
+      path.lineTo(widthFull, heightFull);
+      path.lineTo(widthFull, 0);
+      path.lineTo(0, 0);
 
-    //Wavey Pattern
-    path.quadraticBezierTo(widthOffset + -widthOffset, heightFull / 4,
-        widthOffset, heightFull / 2);
+      //Wavey Pattern
+      path.quadraticBezierTo(widthOffset + -widthOffset, heightFull / 4,
+          widthOffset, heightFull / 2);
 
-    path.quadraticBezierTo(
-        widthOffset + widthOffset, 0.75 * heightFull, widthOffset, heightFull);
+      path.quadraticBezierTo(widthOffset + widthOffset, 0.75 * heightFull,
+          widthOffset, heightFull);
 
-    path.close();
+      path.close();
 
-    return path;
+      return path;
+    } else {
+      Path path = new Path();
+
+      final widthFull = size.width;
+      final heightFull = size.height;
+
+      final heightOffset = 10;
+
+      path.moveTo(0, heightFull - heightOffset);
+
+      path.quadraticBezierTo(
+        widthFull / 4,
+        heightFull * 0.9 - heightOffset,
+        widthFull / 2,
+        heightFull - heightOffset,
+      );
+
+      path.quadraticBezierTo(
+        3 * widthFull / 4,
+        heightFull * 0.9 - heightOffset,
+        widthFull,
+        heightFull - heightOffset,
+      );
+
+      path.lineTo(widthFull, 0);
+      path.lineTo(0, 0);
+      path.close();
+
+      return path;
+    }
   }
 
   @override
