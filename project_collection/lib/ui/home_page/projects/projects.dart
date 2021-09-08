@@ -21,7 +21,7 @@ class _ProjectsState extends State<Projects> {
   Widget build(BuildContext context) {
     final size = getSize(context);
     return ColumnSuper(
-      key: this.widget.key,
+      // key: this.widget.key,
       innerDistance: -columnOffset,
       children: [
         MyBannerHeading(

@@ -20,7 +20,7 @@ class _SkillsState extends State<Skills> {
   Widget build(BuildContext context) {
     final size = getSize(context);
     return Container(
-      key: StaticData.skillsKey,
+      // key: StaticData.skillsKey,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage("images/blueCoral.png"),

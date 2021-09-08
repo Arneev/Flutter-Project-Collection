@@ -26,7 +26,7 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     final size = getSize(context);
     return Container(
-      key: this.widget.key,
+      // key: this.widget.key,
       alignment: Alignment.topCenter,
       width: size.width * 1,
       margin: EdgeInsets.only(bottom: 15, top: 0),
