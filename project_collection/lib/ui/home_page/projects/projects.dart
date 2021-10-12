@@ -35,6 +35,7 @@ class _ProjectsState extends State<Projects> {
         PlaterProject(),
         FinanceManagerProject(),
         LecTracProject(),
+        LNBProject(),
         CategoraProject(),
       ],
     );
@@ -363,6 +364,49 @@ Widget PlaterProject() {
   );
 }
 
+// ignore: non_constant_identifier_names
+Widget LNBProject() {
+  return ProjectModel(
+    logoParentWidget: (Widget child) => Container(
+      child: child,
+    ),
+    accentColor: Colors.grey[800]!,
+    gradientColors: [
+      Colors.teal,
+      Color(0xFFffa781),
+    ],
+    logoColor: null,
+    logoName: "lnb.png",
+    projectName: "Last National Bank",
+    textColor: Colors.white,
+    technologies: [
+      "Flutter",
+      "MySQL",
+      "PHP",
+    ],
+    paragraphs: <TextSpan>[
+      TextSpan(
+        text: '''Like your banking app but, better!\n\nJust kidding.''',
+      ),
+      TextSpan(
+        text: "\n\nKeep track of your finances, bank with LNB.",
+      ),
+      TextSpan(
+        text:
+            "\n\nA group project with 8 team members. Our team, Execution Empire, decided to make a banking as our final year project. Create different accounts, transfer amongst them and other LNB Bankers. Monitor your timeline and get PDF Statements!",
+      ),
+    ],
+    projectIcons: <ProjectIcon>[
+      ProjectIcon(
+        color: Colors.white,
+        icon: webIcon,
+        onTap: () => launch("https://execution-empire.co.za"),
+      ),
+    ],
+  );
+}
+
+//Rotations
 class RotateLifePlum extends StatefulWidget {
   final Widget child;
 

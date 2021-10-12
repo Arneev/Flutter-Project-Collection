@@ -171,7 +171,7 @@ class SkillCube extends StatelessWidget {
               alignment: Alignment.center,
               child: AutoSizeText(
                 text,
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: paragraphTextStyle,
                 // ),
               ),
